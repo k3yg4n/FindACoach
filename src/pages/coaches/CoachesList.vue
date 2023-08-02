@@ -1,7 +1,8 @@
 <template>
+  <section>FILTER</section>
   <section>
     <ul>
-      <coach-details></coach-details>
+      List of Coaches
     </ul>
   </section>
 </template>
