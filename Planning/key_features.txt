@@ -1,0 +1,21 @@
+DEFINE FEATURES
+
+Find A Coach Functionality
+- List all available coaches
+- View coach details
+- Register as a coach
+- Contact a coach
+
+Requests (Messages) Functionality
+- Contact a coach
+- View incoming requests as a 
+
+
+DEFINE DATA MODELS / VUEX STORE LAYOUT
+
+App-wide State and Getters
+
+Actions & Mutations
+
+
+DEFINE "DESIGN" AND COMPONENTS/LAYOUT
