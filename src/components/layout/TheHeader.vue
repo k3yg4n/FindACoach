@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav>
-      <h1><router-link to="/">Find a Coach</router-link></h1>
+      <h1><router-link to="/">L e v e l UP</router-link></h1>
       <ul>
         <li><router-link to="/coaches">All Coaches</router-link></li>
         <li><router-link to="/requests">Requests</router-link></li>
@@ -11,6 +11,7 @@
 </template>
 
 <style scoped>
+@import url('https://fonts.cdnfonts.com/css/arcade-classic');
 header {
   width: 100%;
   height: 5rem;
@@ -35,7 +36,9 @@ a.router-link-active {
 }
 
 h1 {
+  font-family: 'ArcadeClassic', sans-serif;
   margin: 0;
+  font-size: 50px;
 }
 
 h1 a {
