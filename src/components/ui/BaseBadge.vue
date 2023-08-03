@@ -48,6 +48,6 @@ export default {
 
 .teamfightTactics {
   background-color: #2ec269;
-  color: rgb(146, 98, 4);
+  color: rgb(57, 45, 7);
 }
 </style>

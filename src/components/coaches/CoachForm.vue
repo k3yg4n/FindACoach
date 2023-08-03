@@ -24,14 +24,14 @@
     <div class="form-control">
       <h3>Games of Expertise</h3>
       <div>
-        <input type="checkbox" id="valorant" value="Valorant" v-model="games" />
+        <input type="checkbox" id="valorant" value="valorant" v-model="games" />
         <label for="valorant">VALORANT</label>
       </div>
       <div>
         <input
           type="checkbox"
           id="leagueOfLegends"
-          value="League of Legends"
+          value="league of legends"
           v-model="games"
         />
         <label for="leagueOfLegends">League of Legends</label>
@@ -40,7 +40,7 @@
         <input
           type="checkbox"
           id="teamfightTactics"
-          value="Teamfight Tactics"
+          value="teamfight tactics"
           v-model="games"
         />
         <label for="teamfightTactics">Teamfight Tactics</label>
@@ -52,6 +52,7 @@
 
 <script>
 export default {
+  emits: ['save-data'],
   data() {
     return {
       firstName: '',
@@ -64,14 +65,13 @@ export default {
   methods: {
     submitForm() {
       const formData = {
-        id: String(Date.now()),
-        firstName: this.firstName,
-        lastName: this.lastName,
+        first: this.firstName,
+        last: this.lastName,
+        desc: this.description,
+        rate: this.hourlyRate,
         games: this.games,
-        description: this.description,
-        hourlyRate: this.hourlyRate,
       };
-      console.log(formData);
+      this.$emit('save-data', formData);
     },
   },
 };
