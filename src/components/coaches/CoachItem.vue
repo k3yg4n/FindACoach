@@ -3,11 +3,20 @@
     <h3>{{ fullName }}</h3>
     <h4>${{ hourlyRate }}/hour</h4>
     <div>
-      <span v-for="game in games" :key="game">{{ game }}</span>
+      <base-badge
+        v-for="game in games"
+        :key="game"
+        :title="game"
+        :type="game"
+      ></base-badge>
     </div>
     <div class="actions">
-      <router-link :to="coachContactLink">Contact</router-link>
-      <router-link :to="coachViewDetailsLink">View Details</router-link>
+      <base-button :isLink="true" :to="coachContactLink" mode="outline"
+        >Contact</base-button
+      >
+      <base-button :isLink="true" :to="coachViewDetailsLink"
+        >View Details</base-button
+      >
     </div>
   </li>
 </template>
