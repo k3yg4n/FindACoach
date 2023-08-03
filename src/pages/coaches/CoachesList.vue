@@ -1,5 +1,7 @@
 <template>
-  <section>FILTER</section>
+  <section>
+    <coach-filter @change-filter="updateFilters"></coach-filter>
+  </section>
   <section>
     <base-card>
       <div class="controls">
@@ -27,17 +29,48 @@
 
 <script>
 import CoachItem from '../../components/coaches/CoachItem.vue';
+import CoachFilter from '../../components/coaches/CoachFilter.vue';
 
 export default {
   components: {
     CoachItem,
+    CoachFilter,
+  },
+  data() {
+    return {
+      activeFilters: {
+        valorant: true,
+        leagueOfLegends: true,
+        teamfightTactics: true,
+      },
+    };
   },
   computed: {
     filteredCoaches() {
-      return this.$store.getters['coaches/coaches'];
+      let coaches = this.$store.getters['coaches/coaches'];
+      return coaches.filter((coach) => {
+        if (this.activeFilters['valorant'] && coach.games.includes('valorant'))
+          return true;
+        if (
+          this.activeFilters['leagueOfLegends'] &&
+          coach.games.includes('league of legends')
+        )
+          return true;
+        if (
+          this.activeFilters['teamfightTactics'] &&
+          coach.games.includes('teamfight tactics')
+        )
+          return true;
+        return false;
+      });
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
+    },
+  },
+  methods: {
+    updateFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     },
   },
 };
