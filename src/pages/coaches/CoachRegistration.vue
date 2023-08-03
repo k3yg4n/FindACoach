@@ -17,6 +17,7 @@ export default {
   methods: {
     saveData(data) {
       this.$store.dispatch('coaches/addCoach', data);
+      this.$router.replace('/coaches');
     },
   },
 };

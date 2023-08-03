@@ -7,11 +7,17 @@ const store = createStore({
     coaches: coachesModule,
   },
   state() {
-    return {};
+    return {
+      userId: 'c4',
+    };
   },
   mutations: {},
   actions: {},
-  getters: {},
+  getters: {
+    userId(state) {
+      return state.userId;
+    },
+  },
 });
 
 export default store;
