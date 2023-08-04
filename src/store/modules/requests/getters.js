@@ -6,7 +6,7 @@ export default {
     // Filter for requests of the currently registered coach
     return allRequests.filter((request) => request.coachId === currentUserId);
   },
-  hasRequests(state, getters) {
+  hasRequests(_, getters) {
     return getters['requests'] && getters['requests'].length > 0;
   },
 };
