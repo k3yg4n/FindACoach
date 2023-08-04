@@ -79,7 +79,7 @@
         At least one Game of Expertise must be selected.
       </p>
     </div>
-    <p v-if="!formIsValid" class="invalid">
+    <p v-if="!formIsValid">
       One or more fields is invalid. Please make changes before submitting.
     </p>
     <base-button>Register</base-button>
