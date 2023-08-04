@@ -30,7 +30,12 @@ export default {
       id: userId,
     });
   },
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    // Do not update if last fetch was less than a minute ago
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
+
     // GET request
     const response = await fetch(
       `https://vue-coach-finder-5db23-default-rtdb.firebaseio.com/coaches.json`
@@ -58,5 +63,6 @@ export default {
     }
 
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
   },
 };
