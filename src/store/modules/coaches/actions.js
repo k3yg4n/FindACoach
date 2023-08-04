@@ -38,7 +38,9 @@ export default {
     const responseData = await response.json();
 
     if (!response.ok) {
-      // Error handling...
+      // Error handling
+      const error = new Error(responseData.message || 'Failed to fetch!');
+      throw error; // Handled by CoachesList component
     }
 
     // Transform received data object (dict of dicts) into correct form (array of dicts)

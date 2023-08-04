@@ -1,4 +1,8 @@
 <template>
+  <!-- Make sure to convert error into a boolean if truthy value (ex: string )-->
+  <base-dialog :show="!!error" title="An error occured!" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
   <section>
     <coach-filter @change-filter="updateFilters"></coach-filter>
   </section>
@@ -50,6 +54,7 @@ export default {
         teamfightTactics: true,
       },
       isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -84,9 +89,16 @@ export default {
     },
     async loadCoaches() {
       this.isLoading = true;
-      await this.$store.dispatch('coaches/loadCoaches');
+      try {
+        await this.$store.dispatch('coaches/loadCoaches');
+      } catch (error) {
+        this.error = error.message || 'Something went wrong!';
+      }
       // Listen for the promise completion to know loading is done.
       this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
   created() {
