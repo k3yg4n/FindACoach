@@ -6,7 +6,7 @@ export default {
     return state.coaches && state.coaches.length > 0;
   },
   isCoachAlready(_, getters, _2, rootGetters) {
-    const userId = rootGetters.userId;
+    const userId = rootGetters.currentUserId;
     const coaches = getters.coaches;
     return coaches.some((coach) => coach.id === userId);
   },

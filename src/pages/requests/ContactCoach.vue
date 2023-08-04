@@ -45,10 +45,13 @@ export default {
         return;
       }
       const formData = {
+        coachId: this.$route.params.id, // params: true on parent route (coachDetails route)
         email: this.email,
         message: this.message,
       };
-      console.log(formData);
+      this.$store.dispatch('requests/addRequest', formData);
+      // Navigate away after adding request
+      this.$router.replace('/coaches');
     },
   },
 };

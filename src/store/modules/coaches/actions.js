@@ -1,7 +1,7 @@
 export default {
   addCoach(context, payload) {
     const coachData = {
-      id: context.rootGetters.userId,
+      id: context.rootGetters.currentUserId,
       firstName: payload.first,
       lastName: payload.last,
       games: payload.games,
