@@ -30,4 +30,31 @@ export default {
       id: userId,
     });
   },
+  async loadCoaches(context) {
+    // GET request
+    const response = await fetch(
+      `https://vue-coach-finder-5db23-default-rtdb.firebaseio.com/coaches.json`
+    );
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      // Error handling...
+    }
+
+    // Transform received data object (dict of dicts) into correct form (array of dicts)
+    const coaches = [];
+    for (const key in responseData) {
+      const coach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        description: responseData[key].description,
+        hourlyRate: responseData[key].hourlyRate,
+        games: responseData[key].games,
+      };
+      coaches.push(coach);
+    }
+
+    context.commit('setCoaches', coaches);
+  },
 };

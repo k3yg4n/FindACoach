@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">
+  <div>
     <the-header></the-header>
     <router-view></router-view>
   </div>
@@ -26,9 +26,5 @@ html {
 
 body {
   margin: 0;
-}
-
-.bg {
-  background-color: rgb(85, 29, 169);
 }
 </style>

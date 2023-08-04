@@ -2,8 +2,8 @@ export default {
   addCoach(state, payload) {
     state.coaches.push(payload);
   },
-  removeCoach(state, payload) {
-    const coachId = payload;
-    state.coaches.filter((coach) => coach.id !== coachId);
+  // Set local coaches equal to coaches fetched from database
+  setCoaches(state, payload) {
+    state.coaches = payload;
   },
 };
