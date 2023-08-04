@@ -11,7 +11,7 @@
     <base-card>
       <header>
         <h2>Interested? Reach out now!</h2>
-        <base-button :link="true" :to="contactLink">Contact</base-button>
+        <base-button :isLink="true" :to="contactLink">Contact</base-button>
       </header>
       <!-- Contact form -->
       <router-view></router-view>
@@ -61,7 +61,7 @@ export default {
       return this.selectedCoach.games;
     },
     contactLink() {
-      return `${this.$route.path}/${this.id}/contact`; // ex: /coaches/c1/contact
+      return `${this.$route.path}/contact`; // ex: /coaches/c1/contact
     },
   },
 };
