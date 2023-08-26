@@ -16,20 +16,18 @@ export default {
 
     // Req Failure
     if (!response.ok) {
-      console.log(responseData);
       const error = new Error(
         responseData.message || 'Failed to authenticate.'
       );
       throw error;
+    } else {
+      // Req Succeeded
+      context.commit('setUser', {
+        token: responseData.idToken,
+        currentUserId: responseData.localId,
+        tokenExpiration: responseData.expiresIn,
+      });
     }
-
-    // Req Succeeded
-    console.log(responseData);
-    context.commit('setUser', {
-      token: responseData.idToken,
-      currentUserId: responseData.localId,
-      tokenExpiration: responseData.expiresIn,
-    });
   },
   async signup(context, payload) {
     const response = await fetch(
@@ -48,20 +46,18 @@ export default {
 
     // Req Failure
     if (!response.ok) {
-      console.log(responseData);
       const error = new Error(
         responseData.message || 'Failed to authenticate.'
       );
       throw error;
+    } else {
+      // Req Succeeded
+      context.commit('setUser', {
+        token: responseData.idToken,
+        currentUserId: responseData.localId,
+        tokenExpiration: responseData.expiresIn,
+      });
     }
-
-    // Req Succeeded
-    console.log(responseData);
-    context.commit('setUser', {
-      token: responseData.idToken,
-      currentUserId: responseData.localId,
-      tokenExpiration: responseData.expiresIn,
-    });
   },
   logout(context) {
     context.commit('setUser', {
