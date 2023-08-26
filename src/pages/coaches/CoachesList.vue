@@ -16,8 +16,11 @@
           <base-button
             :is-link="true"
             to="/register"
-            v-if="!isCoach && !isLoading"
+            v-if="isLoggedIn && !isCoach && !isLoading"
             >Register as a Coach</base-button
+          >
+          <base-button :is-link="true" to="/auth" v-if="!isLoggedIn"
+            >Login</base-button
           >
         </div>
         <div v-if="isLoading">
@@ -85,6 +88,9 @@ export default {
     },
     isCoach() {
       return this.$store.getters['coaches/isCoachAlready'];
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
     },
   },
   methods: {
