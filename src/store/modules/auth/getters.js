@@ -9,4 +9,7 @@ export default {
     // We are authenticated if we have a token
     return !!state.token;
   },
+  didAutoLogout(state) {
+    return state.didAutoLogout;
+  },
 };

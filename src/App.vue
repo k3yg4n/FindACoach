@@ -16,6 +16,19 @@ export default {
   created() {
     this.$store.dispatch('tryAutoLogin');
   },
+  computed: {
+    didAutoLogout() {
+      return this.$store.getters.didAutoLogout;
+    },
+  },
+  watch: {
+    didAutoLogout(currValue, prevValue) {
+      if (currValue && currValue !== prevValue) {
+        // If autologout completed and changed from not autologout
+        this.$router.replace('/auth');
+      }
+    },
+  },
 };
 </script>
 

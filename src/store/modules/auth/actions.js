@@ -1,3 +1,6 @@
+// Ensures we only have one timer active at a time
+let timer;
+
 export default {
   // Contains both logic for signup and login
   async auth(context, payload) {
@@ -29,14 +32,21 @@ export default {
       throw error;
     } else {
       // Req Succeeded
+      const expiresIn = responseData.expiresIn * 1000;
+      const expirationDate = new Date().getTime() + expiresIn;
+      // Persistent items in local storage
       localStorage.setItem('token', responseData.idToken); // Store values in local storage
       localStorage.setItem('userId', responseData.localId);
-      localStorage.setItem('tokenExpiration', responseData.expiresIn);
+      localStorage.setItem('tokenExpiration', expirationDate);
+
+      // Expire tokens after certain duration
+      timer = setTimeout(function () {
+        context.dispatch('autoLogout');
+      }, expiresIn);
 
       context.commit('setUser', {
         token: responseData.idToken,
         currentUserId: responseData.localId,
-        tokenExpiration: responseData.expiresIn,
       });
     }
   },
@@ -58,23 +68,44 @@ export default {
     const userId = localStorage.getItem('userId');
     const tokenExpiration = localStorage.getItem('tokenExpiration');
 
+    // Find the difference between token expiration and current time
+    const expiresIn = +tokenExpiration - new Date().getTime();
+
+    // Token has expired
+    if (expiresIn < 0) {
+      return;
+    }
+
     if (token && userId) {
+      // Update global timer for token timeout
+      timer = setTimeout(function () {
+        context.dispatch('autoLogout');
+      }, expiresIn);
+
+      // Commit new token to state
       context.commit('setUser', {
         token: token,
         currentUserId: userId,
-        tokenExpiration: tokenExpiration,
       });
     }
   },
   logout(context) {
+    // Remove persistent items in localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('tokenExpiration');
 
+    // Clear the current token timer
+    clearTimeout(timer);
+
+    // Commit changes to app state
     context.commit('setUser', {
       currentUserId: null,
       token: null,
-      tokenExpiration: null,
     });
+  },
+  autoLogout(context) {
+    context.dispatch('logout');
+    context.commit('setAutoLogout');
   },
 };
